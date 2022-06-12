@@ -71,9 +71,22 @@ function cards() {
     
         postData('https://frontend-test-assignment-api.abz.agency/api/v1/users', formData, token)
             .then(data => {
-                cardsBody.innerHTML = '';
-                getUsersData();
                 console.log(data);
+                if (data.fails) {
+                    
+                    for (let key in data.fails) {
+                        let elem = document.querySelector(`.form-card__${key}`);
+                        const span = document.createElement('span');
+                        span.classList.add('error');
+                        span.append(data.fails[key].join());
+
+                        elem.after(span);
+                    }
+                } else {
+                    cardsBody.innerHTML = '';
+                    getUsersData();
+                    console.log(data);
+                }
             })
             .catch(err => err.message)
             .finally(() => {
@@ -94,10 +107,9 @@ function cards() {
         .then(data => {
             showCards(data.users);
             console.log(data); 
-
+            page = 1;
             if (page === data.total_pages) {
                 hideBtn();
-                page = 1;
             } else {
                 showBtn();
             }
@@ -107,7 +119,7 @@ function cards() {
     getUsersData();
 
     function showBtn() {
-        showMoreBtn.style.display = 'block';
+        showMoreBtn.style.display = 'inline-block';
     }
 
     function hideBtn() {

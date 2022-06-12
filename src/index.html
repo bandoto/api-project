@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,31 +9,81 @@
 
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <section class="cards">
-        <a href="" class="showmore-btn">Show More</a>
-        <div class="cards__body">
-            
-        </div>
-        <form action="" class="cards__form form-card">
-            <input type="text" placeholder="name" class="form-card__name">
-            <input type="text" placeholder="email" class="form-card__email">
-            <input type="tel" placeholder="phone" class="form-card__phone">
-            <span class="pos">
-                Select your position
-            </span>
-            <div class="form-card__pos">
-                <input type="radio">
-                <input type="radio">
-                <input type="radio">
-                <input type="radio">
+    <div class="wrapper">
+        <header class="header">
+            <div class="container">
+                <div class="header__body">
+                    <a href="#" class="header__logo">
+                        <img src="img/logo.svg" alt="">
+                    </a>
+                    <div class="header__action action-header">
+                        <a href="#users" class="action-header__item">Users</a>
+                        <a href="#signup" class="action-header__item">Sign up</a>
+                    </div>
+                </div>
             </div>
+        </header>
+        <main class="main">
+            <section class="bg">
+                <div class="container bg__container">
+                    <div class="bg__body">
+                        <h1>Test assignment for front-end developer</h1>
+                        <p>What defines a good front-end developer is one that has skilled knowledge of HTML, CSS, JS
+                            with a vast understanding of User design thinking as they'll be building web interfaces with
+                            accessibility in mind. They should also be excited to learn, as the world of Front-End
+                            Development keeps evolving.</p>
+                        <a href="#signup" class="action-header__item">Sign up</a>    
+                    </div>
+                </div>
+            </section>
+            <section class="cards">
+                <div class="container">
+                    <h1 id="users">Working with GET request</h1>
+                    <div class="cards__body">
+                        
+                    </div>
+                    <div class="cards__btn">
+                        <a href="" class="showmore-btn action-header__item">Show More</a>
+                    </div>
+                   <div class="cards__form">
+                    <h1 id="signup">Working with POST request</h1>
+                    <form action="" class="cards__body-form form-card">
+                        <input type="text" placeholder="Your name" class="form-card__name" required>
+                        <input type="text" placeholder="Email" class="form-card__email" required>
+                        <input type="tel" id="tel" placeholder="Phone" class="form-card__phone" required>
+                        <label for="tel">+38 (XXX) XXX - XX - XX</label>
+                        
+                        <div class="form-card__radiobtn">
+                            <span class="form-card__title">
+                                Select your position
+                            </span>
+                            <div class="form-card__pos">
+                                <input type="radio">
+                                <input type="radio">
+                                <input type="radio">
+                                <input type="radio">
+                            </div>
+                        </div>
+    
+                        <input type="file" id="file" placeholder="photo" name="photo" class="form-card__photo" required>
+                        <label for="file">
+                            <span>Upload</span>
+                            Upload your photo
+                        </label>
+    
+                        <button type="submit" class="action-header__item">Sign up</button>
+                    </form>
+                   </div>
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
 
-            <input type="file" placeholder="photo" name="photo" class="form-card__photo">
-
-            <button type="submit">Submit</button>
-        </form>
-    </section>
+        </footer>
+    </div>
     <script src="js/script.js"></script>
 </body>
+
 </html>
