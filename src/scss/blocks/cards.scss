@@ -112,7 +112,6 @@
         line-height: 26px;
 
         color: $black;
-        margin-bottom: 7px;
     }
 
     label[for=tel] {
@@ -271,4 +270,10 @@
     width: 100%;
     max-width: 380px;
     margin-bottom: 10px;
+}
+
+#success {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
 }

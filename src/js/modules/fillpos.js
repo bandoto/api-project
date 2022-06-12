@@ -16,6 +16,7 @@ function fillPos(item, dataArr) {
             display: flex;
             align-items: center;
             gap: 10px;
+            margin-bottom: 7px;
         `;
 
         div.append(inp);

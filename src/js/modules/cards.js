@@ -70,25 +70,35 @@ function cards() {
         formData.append('email', newPost.email); 
         formData.append('phone', newPost.phone); 
         formData.append('photo', newPost.photo);
-    
+        
         postData('https://frontend-test-assignment-api.abz.agency/api/v1/users', formData, token)
             .then(data => {
-                console.log(data);
                 if (data.fails) { 
                     for (let key in data.fails) {
-                        let elem = document.querySelector(`.form-card__${key}`);
+                        let input = document.querySelector(`input[name=${key}]`);
                         const span = document.createElement('span');
                         span.classList.add('error');
                         span.append(data.fails[key].join());
 
-                        elem.after(span);
+                        if (!input.nextElementSibling.classList.contains('error')) {
+                            input.after(span);
+                        }
+
+                        if (data.fails.position_id) {
+                            postPos.forEach(item => {
+                                item.style.cssText = `
+                                    border: 1px solid red;
+                                `;
+                            });
+                        }
                     }
                 } else {
                     form.classList.add('hide');
                     success.style.display = 'block';
                     cardsBody.innerHTML = '';
+                    document.querySelectorAll('.error').forEach(err => err.remove());
+
                     getUsersData();
-                    console.log(data); 
                 }
             })
             .catch(err => err.message)
@@ -97,10 +107,16 @@ function cards() {
                     setTimeout(() => {
                         form.classList.remove('hide');
                         success.style.display = 'none';
-                    }, 2000);
-                }
+                        
+                        postPos.forEach(item => {
+                            item.style.cssText = `
+                                border: 1px solid #00BDD3;
+                            `;
+                        });
+                    }, 5000);
 
-                form.reset();
+                    form.reset();
+                }
             });
     });
        
