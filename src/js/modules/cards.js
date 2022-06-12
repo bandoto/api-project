@@ -79,7 +79,7 @@ function cards() {
                     successForm();
                    
                     cardsBody.innerHTML = '';
-                    getUsersData();
+                    getUsersData(1);
                 }
             })
             .catch(err => err.message)
@@ -95,26 +95,27 @@ function cards() {
                             `;
                         });
                     }, 5000);
-
                     form.reset();
                 }
+
             });
+
+       
     });
        
     showMoreBtn.addEventListener('click', (e) => {
         e.preventDefault();
 
-        page++;
         console.log(page);
-        getUsersData();
+        getUsersData(++page);
     });
 
-    function getUsersData() {
+    function getUsersData(page) {
         getResources(`https://frontend-test-assignment-api.abz.agency/api/v1/users?page=${page}&count=6`)
         .then(data => {
             showCards(data.users);
             console.log(data); 
-            page = 1;
+    
             if (page === data.total_pages) {
                 hideBtn();
             } else {
@@ -123,7 +124,7 @@ function cards() {
         });
     }
 
-    getUsersData();
+    getUsersData(1);
 
     function showBtn() {
         showMoreBtn.style.display = 'inline-block';
