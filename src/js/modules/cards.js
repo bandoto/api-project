@@ -11,6 +11,8 @@ function cards() {
     const postPhoto = document.querySelector('input[type="file"]');
     const postPos = document.querySelectorAll('input[type="radio"]');
 
+    const success = document.querySelector('#success');
+
     const form = document.querySelector('form');
     
     const showMoreBtn = document.querySelector('.showmore-btn');
@@ -72,8 +74,7 @@ function cards() {
         postData('https://frontend-test-assignment-api.abz.agency/api/v1/users', formData, token)
             .then(data => {
                 console.log(data);
-                if (data.fails) {
-                    
+                if (data.fails) { 
                     for (let key in data.fails) {
                         let elem = document.querySelector(`.form-card__${key}`);
                         const span = document.createElement('span');
@@ -83,13 +84,22 @@ function cards() {
                         elem.after(span);
                     }
                 } else {
+                    form.classList.add('hide');
+                    success.style.display = 'block';
                     cardsBody.innerHTML = '';
                     getUsersData();
-                    console.log(data);
+                    console.log(data); 
                 }
             })
             .catch(err => err.message)
             .finally(() => {
+                if (form.classList.contains('hide')) {
+                    setTimeout(() => {
+                        form.classList.remove('hide');
+                        success.style.display = 'none';
+                    }, 2000);
+                }
+
                 form.reset();
             });
     });
