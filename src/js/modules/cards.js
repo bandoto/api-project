@@ -74,30 +74,11 @@ function cards() {
         postData('https://frontend-test-assignment-api.abz.agency/api/v1/users', formData, token)
             .then(data => {
                 if (data.fails) { 
-                    for (let key in data.fails) {
-                        let input = document.querySelector(`input[name=${key}]`);
-                        const span = document.createElement('span');
-                        span.classList.add('error');
-                        span.append(data.fails[key].join());
-
-                        if (!input.nextElementSibling.classList.contains('error')) {
-                            input.after(span);
-                        }
-
-                        if (data.fails.position_id) {
-                            postPos.forEach(item => {
-                                item.style.cssText = `
-                                    border: 1px solid red;
-                                `;
-                            });
-                        }
-                    }
+                    failForm(data.fails);
                 } else {
-                    form.classList.add('hide');
-                    success.style.display = 'block';
+                    successForm();
+                   
                     cardsBody.innerHTML = '';
-                    document.querySelectorAll('.error').forEach(err => err.remove());
-
                     getUsersData();
                 }
             })
@@ -150,6 +131,33 @@ function cards() {
 
     function hideBtn() {
         showMoreBtn.style.display = 'none';
+    }
+
+    function successForm() {
+        form.classList.add('hide');
+        success.style.display = 'block';
+        document.querySelectorAll('.error').forEach(err => err.remove());
+    }
+
+    function failForm(failArr) {
+        for (let key in failArr) {
+            let input = document.querySelector(`input[name=${key}]`);
+            const span = document.createElement('span');
+            span.classList.add('error');
+            span.append(failArr[key].join());
+
+            if (!input.nextElementSibling.classList.contains('error')) {
+                input.after(span);
+            }
+
+            if (failArr.position_id) {
+                postPos.forEach(item => {
+                    item.style.cssText = `
+                        border: 1px solid red;
+                    `;
+                });
+            }
+        }
     }
 
 }
